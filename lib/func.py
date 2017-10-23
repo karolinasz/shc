@@ -6,9 +6,23 @@
 
 import sys
 import urllib2
+import crayons
 import urlparse
 
 
+# we assign functions to variables, to be used later
+# example:
+# >>> print('x')
+# x
+# >>> scribble_this = print
+# >>> scribble_this('x')
+# x
+WHITE = crayons.white
+RED = crayons.red
+YELLOW = crayons.yellow
+ORANGE = crayons.magenta
+BLUE = crayons.blue
+_available_colors = [WHITE, RED, YELLOW, ORANGE, BLUE]
 
 
 def validate_user_input():
@@ -20,7 +34,9 @@ def validate_user_input():
 
 def display_message_in_color(message, status=WHITE):
 	# displays messages in defined colors (white, red, yellow, orange, blue)
-	pass
+	if status not in _available_colors:
+		raise Exception('Such a color is not supported!')
+	print status(message)
 
 def check_if_url_is_valid(url):
 	try:
