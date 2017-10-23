@@ -14,10 +14,8 @@ def validate_user_input():
 	if len(sys.argv) < 2:
 		return False
 	else:
-		if check_if_url_is_valid(sys.argv[1]) === True:
-			return True
-		else:
-			return False
+		return check_if_url_is_valid(sys.argv[1])
+
 
 def display_message_in_color(message, status=WHITE):
 	# displays messages in defined colors (white, red, yellow, orange, blue)
