@@ -6,6 +6,7 @@
 
 import sys
 import urllib2
+import urlparse
 
 
 
@@ -22,8 +23,14 @@ def display_message_in_color(message, status=WHITE):
 	pass
 
 def check_if_url_is_valid(url):
-	# returns true if url is valid
-	pass
+	try:
+		parsed = urlparse.urlparse(url, allow_fragments=True)
+		if parsed.scheme != '' and parsed.netloc != '':
+			return True
+		else:
+			return False
+	except:
+		return False
 
 
 def analyze_headers(url):
