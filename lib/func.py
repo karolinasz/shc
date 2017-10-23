@@ -7,6 +7,7 @@
 import sys
 import urllib2
 import crayons
+import urlparse
 
 
 # we assign functions to variables, to be used later
@@ -28,10 +29,8 @@ def validate_user_input():
 	if len(sys.argv) < 2:
 		return False
 	else:
-		if check_if_url_is_valid(sys.argv[1]) === True:
-			return True
-		else:
-			return False
+		return check_if_url_is_valid(sys.argv[1])
+
 
 def display_message_in_color(message, status=WHITE):
 	# displays messages in defined colors (white, red, yellow, orange, blue)
@@ -40,8 +39,14 @@ def display_message_in_color(message, status=WHITE):
 	print status(message)
 
 def check_if_url_is_valid(url):
-	# returns true if url is valid
-	pass
+	try:
+		parsed = urlparse.urlparse(url, allow_fragments=True)
+		if parsed.scheme != '' and parsed.netloc != '':
+			return True
+		else:
+			return False
+	except:
+		return False
 
 
 def analyze_headers(url):
