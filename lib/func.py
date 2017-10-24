@@ -51,10 +51,11 @@ def check_if_url_is_valid(url):
 
 def analyze_headers(url):
 	# analyzes the http headers (https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers)
-	pass
+	server_response = urllib2.urlopen(url)
+	# check for headers and set them status
 
 
 def run():
-	if validate_user_input() === True:
+	if validate_user_input() == True:
 		url = sys.argv[1]
 		analyze_headers(url)
