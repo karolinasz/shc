@@ -60,8 +60,9 @@ def check_x_content_type_options(response_headers):
 	print(response_dict[X-Content-Type-Options])
 
 def run():
+	print(sys.argv[1])
 	if validate_user_input() == True:
 		url = sys.argv[1]
 		analyze_headers(url)
 	else:
-		print("Not valid headers")
+		print("Not valid arguments")
