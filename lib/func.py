@@ -5,9 +5,9 @@
 '''
 
 import sys
-import urllib2
+import urllib.request
 import crayons
-import urlparse
+import urllib.parse
 
 
 # we assign functions to variables, to be used later
@@ -36,11 +36,11 @@ def display_message_in_color(message, status=WHITE):
 	# displays messages in defined colors (white, red, yellow, orange, blue)
 	if status not in _available_colors:
 		raise Exception('Such a color is not supported!')
-	print status(message)
+	print (status(message))
 
 def check_if_url_is_valid(url):
 	try:
-		parsed = urlparse.urlparse(url, allow_fragments=True)
+		parsed = urllib.parse(url, allow_fragments=True)
 		if parsed.scheme != '' and parsed.netloc != '':
 			return True
 		else:
@@ -53,9 +53,15 @@ def analyze_headers(url):
 	# analyzes the http headers (https://www.owasp.org/index.php/OWASP_Secure_Headers_Project#tab=Headers)
 	server_response = urllib2.urlopen(url)
 	# check for headers and set them status
+	check_x_content_type_options(server_response.info())
 
+def check_x_content_type_options(response_headers):
+	headers_dict = response_headers.dict
+	print(response_dict[X-Content-Type-Options])
 
 def run():
 	if validate_user_input() == True:
 		url = sys.argv[1]
 		analyze_headers(url)
+	else:
+		print("Not valid headers")
